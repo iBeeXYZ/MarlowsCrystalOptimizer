@@ -11,17 +11,20 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.api)
+
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
 
 tasks {
     java {
         disableAutoTargetJvm()
-        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+        toolchain.languageVersion.set(JavaLanguageVersion.of(21))
     }
 
     withType<JavaCompile> {
         options.encoding = Charsets.UTF_8.name()
-        options.release = 17
+        options.release = 21
     }
 
     processResources {
