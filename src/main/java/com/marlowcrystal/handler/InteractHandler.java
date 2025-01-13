@@ -68,8 +68,6 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
             entity.gameEvent(GameEvent.ENTITY_DIE);
             client.player.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, 1.0F, 1.0F);
             entity.discard();
-
-            MarlowCrystal.getInstance().getLogger().info("Crystal with ID " + entity.getId() + " has been destroyed by " + client.player.getName().getString());
         }
     }
 }
