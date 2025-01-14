@@ -62,10 +62,12 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
                 return;
             }
 
+            // Kills the entity client-side
             entity.remove(Entity.RemovalReason.KILLED);
             entity.gameEvent(GameEvent.ENTITY_DIE);
-            client.player.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, 1.0F, 1.0F);
-            entity.discard();
+
+            // Plays the explosion sound client-side
+            client.player.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1.0F, 1.0F);
         }
     }
 }
