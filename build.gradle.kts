@@ -13,7 +13,6 @@ repositories {
     }
 }
 
-
 dependencies {
     minecraft(libs.minecraft)
     mappings(loom.layered {
@@ -31,6 +30,12 @@ tasks {
     java {
         disableAutoTargetJvm()
         toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    }
+
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.base.archivesName.get()}" }
+        }
     }
 
     withType<JavaCompile> {
