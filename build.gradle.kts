@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-version = "1.21.X"
+version = "1.0.0-SNAPSHOT"
 group = "com.marlowcrystal"
 
 repositories {
@@ -17,10 +17,9 @@ dependencies {
     minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${libs.versions.minecraft.version.get()}:${libs.versions.parchmentmc.mappings.get()}@zip")
+        parchment("org.parchmentmc.data:parchment-${libs.versions.minecraft.get()}:${libs.versions.parchmentmc.mappings.get()}@zip")
     })
     modImplementation(libs.fabric.loader)
-    modImplementation(libs.fabric.api)
 
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
@@ -45,15 +44,15 @@ tasks {
 
     processResources {
         inputs.property("version", project.version)
-        inputs.property("minecraft_version", libs.versions.minecraft.version.get())
-        inputs.property("loader_version", libs.versions.loader.version.get())
+        inputs.property("minecraft_version", libs.versions.minecraft.get())
+        inputs.property("loader_version", libs.versions.fabric.loader.get())
         filteringCharset = "UTF-8"
 
         filesMatching("fabric.mod.json") {
             expand(
                 "version" to project.version,
-                "minecraft_version" to libs.versions.minecraft.version.get(),
-                "loader_version" to libs.versions.loader.version.get()
+                "minecraft_version" to libs.versions.minecraft.get(),
+                "loader_version" to libs.versions.fabric.loader.get()
             )
         }
     }
