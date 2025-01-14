@@ -1,6 +1,5 @@
 package com.marlowcrystal.handler;
 
-import com.marlowcrystal.MarlowCrystal;
 import com.marlowcrystal.tools.TieredUtils;
 import com.marlowcrystal.tools.ToolTier;
 import net.minecraft.client.Minecraft;
@@ -43,7 +42,6 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
 
     @Override
     public void onInteraction(InteractionHand interactionHand, Vec3 vec3) {
-
     }
 
     @Override
