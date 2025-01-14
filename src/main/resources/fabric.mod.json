@@ -8,7 +8,11 @@
     "Marlow",
     "Bram"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/Bram1903/MarlowsCrystalOptimizer",
+    "issues": "https://github.com/Bram1903/MarlowsCrystalOptimizer/issues",
+    "sources": "https://github.com/Bram1903/MarlowsCrystalOptimizer"
+  },
   "license": "MIT",
   "icon": "assets/marlows-crystal-optimizer/icon.png",
   "environment": "client",
