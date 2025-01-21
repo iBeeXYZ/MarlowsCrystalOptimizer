@@ -1,16 +1,16 @@
 package com.marlowcrystal.handler;
 
-import com.marlowcrystal.tools.TieredUtils;
-import com.marlowcrystal.tools.ToolTier;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ServerboundInteractPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.EntityHitResult;
@@ -27,15 +27,6 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
         this.client = client;
     }
 
-    @Unique
-    private static boolean isTool(ItemStack itemStack) {
-        Item item = itemStack.getItem();
-
-        // Check if it's a valid tool and belongs to DIAMOND or higher
-        ToolTier tier = TieredUtils.getTier(item);
-        return tier.getLevel() >= ToolTier.DIAMOND.getLevel();
-    }
-
     @Override
     public void onInteraction(InteractionHand interactionHand) {
     }
@@ -47,27 +38,68 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
     @Override
     public void onAttack() {
         HitResult hitResult = client.hitResult;
-        if (hitResult == null || hitResult.getType() != HitResult.Type.ENTITY) {
+        if (!(hitResult instanceof EntityHitResult entityHitResult)) {
             return;
         }
 
-        EntityHitResult entityHitResult = (EntityHitResult) hitResult;
         Entity entity = entityHitResult.getEntity();
-
-        if (entity instanceof EndCrystal) {
-            MobEffectInstance weakness = client.player.getEffect(MobEffects.WEAKNESS);
-            MobEffectInstance strength = client.player.getEffect(MobEffects.DAMAGE_BOOST);
-
-            if (weakness != null && (strength == null || strength.getAmplifier() <= weakness.getAmplifier()) && !isTool(client.player.getMainHandItem())) {
-                return;
-            }
-
-            // Kills the entity client-side
-            entity.remove(Entity.RemovalReason.KILLED);
-            entity.gameEvent(GameEvent.ENTITY_DIE);
-
-            // Plays the explosion sound client-side
-            client.player.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1.0F, 1.0F);
+        if (!(entity instanceof EndCrystal)) {
+            return;
         }
+
+        LocalPlayer player = client.player;
+        if (player == null) {
+            return;
+        }
+
+        // Calculate the total damage
+        double totalDamage = calculateTotalDamage(player);
+
+        if (totalDamage > 0.0D) {
+            destroyCrystal(entity, player);
+        }
+    }
+
+    private double calculateTotalDamage(LocalPlayer player) {
+        // Base attack damage
+        double baseDamage = player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+
+        // Add weapon damage from the held item
+        double weaponDamage = getWeaponDamage(player.getMainHandItem());
+
+        // Add Strength effect
+        MobEffectInstance strength = player.getEffect(MobEffects.DAMAGE_BOOST);
+        double strengthBonus = strength != null ? 3.0D * (strength.getAmplifier() + 1) : 0.0D;
+
+        // Subtract Weakness effect
+        MobEffectInstance weakness = player.getEffect(MobEffects.WEAKNESS);
+        double weaknessPenalty = weakness != null ? 4.0D * (weakness.getAmplifier() + 1) : 0.0D;
+
+        // Total damage, ensuring it doesn't go negative
+        return Math.max(0.0D, baseDamage + weaponDamage + strengthBonus - weaknessPenalty);
+    }
+
+    private double getWeaponDamage(ItemStack item) {
+        if (item.isEmpty()) {
+            return 0.0D;
+        }
+
+        final double[] totalDamage = {0.0D};
+
+        // Iterate through modifiers and sum the damage values
+        item.forEachModifier(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
+            if (Attributes.ATTACK_DAMAGE.equals(attribute)) {
+                totalDamage[0] += modifier.amount();
+            }
+        });
+
+        return totalDamage[0];
+    }
+
+    private void destroyCrystal(Entity crystal, LocalPlayer player) {
+        crystal.remove(Entity.RemovalReason.KILLED);
+        crystal.gameEvent(GameEvent.ENTITY_DIE);
+
+        player.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1.0F, 1.0F);
     }
 }
