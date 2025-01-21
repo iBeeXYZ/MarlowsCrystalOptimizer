@@ -61,17 +61,12 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
     }
 
     private double calculateTotalDamage(LocalPlayer player) {
-        // Base attack damage
         double baseDamage = player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-
-        // Add weapon damage from the held item
         double weaponDamage = getWeaponDamage(player.getMainHandItem());
 
-        // Add Strength effect
         MobEffectInstance strength = player.getEffect(MobEffects.DAMAGE_BOOST);
         double strengthBonus = strength != null ? 3.0D * (strength.getAmplifier() + 1) : 0.0D;
 
-        // Subtract Weakness effect
         MobEffectInstance weakness = player.getEffect(MobEffects.WEAKNESS);
         double weaknessPenalty = weakness != null ? 4.0D * (weakness.getAmplifier() + 1) : 0.0D;
 
