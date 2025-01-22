@@ -17,6 +17,9 @@
   "icon": "assets/marlows-crystal-optimizer/icon.png",
   "environment": "client",
   "entrypoints": {
+    "main": [
+      "com.marlowcrystal.MarlowCrystalLoader"
+    ],
     "client": [
       "com.marlowcrystal.MarlowCrystal"
     ]
@@ -26,6 +29,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=${minecraft_version}"
+    "minecraft": ">=${minecraft_version}",
+    "fabric-api": "*"
   }
 }

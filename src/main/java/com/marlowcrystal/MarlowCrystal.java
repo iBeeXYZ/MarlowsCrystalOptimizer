@@ -19,7 +19,6 @@ public class MarlowCrystal implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         instance = this;
-
         logger.info("Mod initialized");
     }
 }
