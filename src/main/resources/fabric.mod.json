@@ -17,9 +17,6 @@
   "icon": "assets/marlows-crystal-optimizer/icon.png",
   "environment": "client",
   "entrypoints": {
-    "main": [
-      "com.marlowcrystal.MarlowCrystalLoader"
-    ],
     "client": [
       "com.marlowcrystal.MarlowCrystal"
     ]
