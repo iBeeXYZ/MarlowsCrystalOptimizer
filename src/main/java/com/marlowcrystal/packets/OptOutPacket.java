@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class OptOutPacket implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<OptOutPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.parse("mco"));
+    public static final CustomPacketPayload.Type<OptOutPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.tryParse("mco"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, OptOutPacket> STREAM_CODEC = new StreamCodec<>() {
         @Override

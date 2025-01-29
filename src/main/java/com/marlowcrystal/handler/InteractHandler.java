@@ -8,7 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.item.ItemStack;
@@ -82,7 +82,7 @@ public class InteractHandler implements ServerboundInteractPacket.Handler {
         final double[] totalDamage = {0.0D};
 
         // Iterate through modifiers and sum the damage values
-        item.forEachModifier(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
+        item.forEachModifier(EquipmentSlot.MAINHAND, (attribute, modifier) -> {
             if (Attributes.ATTACK_DAMAGE.equals(attribute)) {
                 totalDamage[0] += modifier.amount();
             }
