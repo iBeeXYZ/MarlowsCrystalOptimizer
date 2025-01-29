@@ -17,7 +17,7 @@ public class OptOutPacket implements CustomPacketPayload {
         }
 
         @Override
-        public OptOutPacket decode(RegistryFriendlyByteBuf buffer) {
+        public @NotNull OptOutPacket decode(RegistryFriendlyByteBuf buffer) {
             return new OptOutPacket();
         }
     };
