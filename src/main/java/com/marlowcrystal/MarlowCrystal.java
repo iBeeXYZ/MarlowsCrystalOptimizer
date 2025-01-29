@@ -20,10 +20,9 @@ public class MarlowCrystal implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         instance = this;
-
-        logger = new Logger();
         PayloadTypeRegistry.playC2S().register(OptOutPacket.TYPE, OptOutPacket.STREAM_CODEC);
 
+        logger = new Logger();
         logger.info("Mod initialized");
     }
 }
