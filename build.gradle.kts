@@ -4,7 +4,7 @@ plugins {
 }
 
 version = "1.0.3"
-group = "com.marlowcrystal"
+group = "com.deathmotion.marlowcrystal"
 
 base {
     archivesName.set("${project.name}-${libs.versions.minecraft.get()}.X")
