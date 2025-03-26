@@ -1,11 +1,11 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.marlowcrystal.mixin",
+  "package": "com.deathmotion.marlowcrystal.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "com.deathmotion.marlowcrystal.mixin.ClientConnectionMixin",
-    "com.deathmotion.marlowcrystal.mixin.ServerOptOut"
+    "ClientConnectionMixin",
+    "ServerOptOut"
   ],
   "injectors": {
     "defaultRequire": 1
