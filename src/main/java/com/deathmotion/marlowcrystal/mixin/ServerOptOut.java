@@ -1,6 +1,6 @@
-package com.marlowcrystal.mixin;
+package com.deathmotion.marlowcrystal.mixin;
 
-import com.marlowcrystal.packets.OptOutPacket;
+import com.deathmotion.marlowcrystal.packets.OptOutPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundLoginPacket;

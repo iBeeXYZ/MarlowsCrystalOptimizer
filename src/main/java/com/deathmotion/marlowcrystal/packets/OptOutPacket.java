@@ -1,4 +1,4 @@
-package com.marlowcrystal.packets;
+package com.deathmotion.marlowcrystal.packets;
 
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.RegistryFriendlyByteBuf;

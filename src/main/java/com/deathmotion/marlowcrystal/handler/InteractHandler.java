@@ -1,4 +1,4 @@
-package com.marlowcrystal.handler;
+package com.deathmotion.marlowcrystal.handler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

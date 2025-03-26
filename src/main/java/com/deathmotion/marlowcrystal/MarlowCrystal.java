@@ -1,7 +1,7 @@
-package com.marlowcrystal;
+package com.deathmotion.marlowcrystal;
 
-import com.marlowcrystal.packets.OptOutPacket;
-import com.marlowcrystal.util.Logger;
+import com.deathmotion.marlowcrystal.packets.OptOutPacket;
+import com.deathmotion.marlowcrystal.util.Logger;
 import lombok.Getter;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

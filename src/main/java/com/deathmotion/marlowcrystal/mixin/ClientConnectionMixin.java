@@ -1,6 +1,6 @@
-package com.marlowcrystal.mixin;
+package com.deathmotion.marlowcrystal.mixin;
 
-import com.marlowcrystal.handler.InteractHandler;
+import com.deathmotion.marlowcrystal.handler.InteractHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
